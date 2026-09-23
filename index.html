@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Yejun Choi — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D1F3C;
+    --navy-mid: #1A3560;
+    --blue: #1E4D8C;
+    --accent: #2E6FCF;
+    --steel: #4A6FA5;
+    --light-blue: #D6E4F7;
+    --off-white: #F4F7FC;
+    --white: #FFFFFF;
+    --text-dark: #0D1F3C;
+    --text-mid: #3A4F6C;
+    --text-light: #6B82A0;
+    --border: #C8D8EE;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  *, *::before, *::after { box-sizing: inherit; margin: 0; padding: 0; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--off-white);
+    color: var(--text-dark);
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    background: var(--navy);
+    z-index: 100;
+    padding: 0 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    color: var(--white);
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--light-blue);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, var(--blue) 100%);
+    color: var(--white);
+    padding: 6rem 2.5rem 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .hero-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    background: rgba(46,111,207,0.15);
+    border: 1px solid rgba(46,111,207,0.3);
+    padding: 0.3rem 0.8rem;
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 600;
+    line-height: 1.15;
+    max-width: 700px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--light-blue);
+  }
+  .hero-statement {
+    font-size: 1.05rem;
+    color: rgba(214,228,247,0.85);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .hero-meta-item {
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-meta-item span:first-child {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--steel);
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+  }
+  .hero-meta-item span:last-child {
+    font-size: 0.9rem;
+    color: var(--light-blue);
+    font-weight: 400;
+  }
+
+  /* WRAPPER */
+  .page-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+  }
+
+  /* SECTION TITLES */
+  .section-header {
+    padding-top: 5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+  }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .section-header .section-num {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 5rem;
+  }
+  .skill-category {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--accent);
+    padding: 1.5rem;
+  }
+  .skill-category h3 {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--steel);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .skill-tag {
+    background: var(--off-white);
+    border: 1px solid var(--border);
+    color: var(--text-mid);
+    font-size: 0.82rem;
+    font-weight: 500;
+    padding: 0.3rem 0.7rem;
+    border-radius: 2px;
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 5rem;
+  }
+  .project-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr;
+    overflow: hidden;
+  }
+  .project-card.featured {
+    border-left: 4px solid var(--accent);
+  }
+  .project-inner {
+    padding: 2rem 2.5rem;
+  }
+  .project-tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+  .project-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.45rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.6rem;
+    line-height: 1.25;
+  }
+  .project-subtitle {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    font-weight: 400;
+  }
+  .project-desc {
+    font-size: 0.92rem;
+    color: var(--text-mid);
+    line-height: 1.75;
+    max-width: 680px;
+    margin-bottom: 1.5rem;
+  }
+  .project-highlights {
+    list-style: none;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .project-highlights li {
+    font-size: 0.85rem;
+    color: var(--text-mid);
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.5;
+  }
+  .project-highlights li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .project-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .tech-pill {
+    background: var(--light-blue);
+    color: var(--blue);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+  }
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 1.5px solid var(--accent);
+    transition: background 0.2s, color 0.2s;
+  }
+  .project-link:hover {
+    background: var(--accent);
+    color: var(--white);
+  }
+  .project-link-secondary {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1px;
+  }
+  .project-link-secondary:hover { color: var(--accent); }
+
+  /* CONTACT STRIP */
+  .contact-strip {
+    background: var(--navy);
+    padding: 3.5rem 2.5rem;
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+    max-width: 100%;
+  }
+  .contact-strip h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--white);
+    font-weight: 600;
+  }
+  .contact-strip p {
+    font-size: 0.88rem;
+    color: var(--steel);
+    margin-top: 0.3rem;
+  }
+  .contact-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .contact-btn {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1.5px solid var(--accent);
+    color: var(--light-blue);
+    transition: background 0.2s, color 0.2s;
+  }
+  .contact-btn:hover { background: var(--accent); color: var(--white); }
+  .contact-btn.primary { background: var(--accent); color: var(--white); }
+  .contact-btn.primary:hover { background: var(--blue); }
+
+  /* FOOTER */
+  footer {
+    background: #080F1C;
+    padding: 1.5rem 2.5rem;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--steel);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    nav { padding: 0 1.25rem; }
+    .hero { padding: 4rem 1.25rem 3.5rem; }
+    .page-wrapper { padding: 0 1.25rem; }
+    .contact-strip { padding: 2.5rem 1.25rem; }
+    footer { padding: 1.5rem 1.25rem; }
+    .project-inner { padding: 1.5rem; }
+    .skills-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">Yejun Choi</span>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div style="background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, var(--blue) 100%);">
+  <div class="hero">
+    <span class="hero-label">Portfolio</span>
+    <h1>Data-driven analyst turning <em>complex problems</em> into clear decisions.</h1>
+    <p class="hero-statement">Junior at Rutgers University Honors College pursuing a B.S. in Business Analytics and Information Technology, with hands-on experience in cross-functional analytics, market research, and data visualization.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span>Institution</span>
+        <span>Rutgers University, Honors College</span>
+      </div>
+      <div class="hero-meta-item">
+        <span>Major</span>
+        <span>Business Analytics and IT</span>
+      </div>
+      <div class="hero-meta-item">
+        <span>GPA</span>
+        <span>3.664 / 4.0 — Dean's List</span>
+      </div>
+      <div class="hero-meta-item">
+        <span>Languages</span>
+        <span>English, Korean</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrapper">
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2>Skills</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-category">
+        <h3>Programming</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">Java</span>
+          <span class="skill-tag">R</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <h3>Data and Analytics</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Microsoft Excel</span>
+          <span class="skill-tag">Tableau</span>
+          <span class="skill-tag">Statistical Modeling</span>
+          <span class="skill-tag">Time Series Analysis</span>
+          <span class="skill-tag">Data Visualization</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <h3>Business</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Market Research</span>
+          <span class="skill-tag">Competitor Analysis</span>
+          <span class="skill-tag">NPV Analysis</span>
+          <span class="skill-tag">Financial Reporting</span>
+          <span class="skill-tag">ERP Systems</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <h3>Soft Skills</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Cross-functional Collaboration</span>
+          <span class="skill-tag">Stakeholder Reporting</span>
+          <span class="skill-tag">Presentation</span>
+          <span class="skill-tag">Problem Solving</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2>Projects</h2>
+    </div>
+    <div class="projects-grid">
+
+      <!-- PROJECT 1: PCStation Marketing Plan -->
+      <div class="project-card featured">
+        <div class="project-inner">
+          <span class="project-tag">Academic Team Project — Marketing Management, Fall 2025</span>
+          <h3>PCStation Marketing Plan</h3>
+          <p class="project-subtitle">Sony Group Corporation — Console/PC Hybrid Product Launch Strategy</p>
+          <p class="project-desc">A comprehensive 14-page marketing plan developed for Sony Group Corporation proposing a new hybrid gaming product, the PCStation, designed to bridge the console and PC gaming markets. The plan covers competitive analysis, SWOT analysis, target market segmentation, growth strategy, pricing, and a full marketing program including social media, omnichannel distribution, and a 1- and 5-year success evaluation framework.</p>
+          <ul class="project-highlights">
+            <li>Conducted industry and competitor analysis across PlayStation, Xbox, Nintendo Switch 2, and PC gaming markets, drawing on Sony's Q2 FY2025 financial data</li>
+            <li>Identified the PC gaming market ($76.7B in 2024, CAGR of 8-9% through 2032) as an untapped opportunity for Sony and proposed the PCStation at a $725 price point to bridge both markets</li>
+            <li>Developed a full marketing program including social media strategy, in-store optimization, and a consumer survey framework to guide product positioning</li>
+            <li>Outlined a quantitative and qualitative success evaluation framework tracking unit sales, revenue, market share, and consumer sentiment across a 5-year window</li>
+          </ul>
+          <div class="project-footer">
+            <div class="project-tech">
+              <span class="tech-pill">Market Research</span>
+              <span class="tech-pill">SWOT Analysis</span>
+              <span class="tech-pill">Competitor Analysis</span>
+              <span class="tech-pill">Financial Modeling</span>
+              <span class="tech-pill">Tableau</span>
+            </div>
+            <div style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap;">
+              <a href="Marketing_Plan_Final_Report__FALL_2025_.pdf" class="project-link" target="_blank">View Full Report</a>
+              <a href="Marketing_Plan_Presentation__FALL_2025_.pdf" class="project-link-secondary" target="_blank">View Presentation</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 2: KISS USA E-Commerce Analysis -->
+      <div class="project-card">
+        <div class="project-inner">
+          <span class="project-tag">Professional Project — KISS USA Marketing Internship, Summer 2025</span>
+          <h3>E-Commerce Platform Launch Analysis</h3>
+          <p class="project-subtitle">KISS USA — Market Feasibility and Recommendation Report</p>
+          <p class="project-desc">Led an end-to-end e-commerce market feasibility analysis for KISS USA's planned online sales launch of a minimum 1,000 product orders. Researched major platforms including Amazon, analyzed pricing strategies, advertising approaches, and product positioning, then outlined associated costs, growth opportunities, and NPVs for each platform. Identified operational constraints including inventory backlogs and insufficient warehouse staffing that put a large-scale launch at risk, and presented honest recommendations to management — who adjusted the launch scope accordingly.</p>
+          <ul class="project-highlights">
+            <li>Conducted competitor and pricing analysis across major e-commerce platforms to assess market positioning ahead of the department's online sales launch</li>
+            <li>Met directly with the e-commerce department to evaluate feasibility and align on operational capacity</li>
+            <li>Outlined NPV comparisons and growth projections across platforms and delivered final recommendations to management with full transparency on operational risks</li>
+            <li>Recommendations were accepted and the launch plan was adjusted, demonstrating direct business impact</li>
+          </ul>
+          <div class="project-footer">
+            <div class="project-tech">
+              <span class="tech-pill">Excel</span>
+              <span class="tech-pill">NPV Analysis</span>
+              <span class="tech-pill">Market Research</span>
+              <span class="tech-pill">E-Commerce Strategy</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 3: KISS Profitability Presentation -->
+      <div class="project-card">
+        <div class="project-inner">
+          <span class="project-tag">Professional Project — KISS USA Supply Chain Internship, Summer 2024</span>
+          <h3>Product Line Profitability Analysis</h3>
+          <p class="project-subtitle">KISS USA — Cross-Functional Intern Presentation to CEO</p>
+          <p class="project-desc">As part of a cross-functional team of five interns drawn from supply chain, chemical formulation, customer experience, and analytics, contributed to a comprehensive profitability analysis of KISS USA's false eyelash product line presented directly to the CEO. Responsible for collecting and organizing quarterly sales data from the company's ERP system, building data visualizations in Excel and Tableau, and translating analytical findings into a format accessible to teammates without an analytics background. The CEO and senior management engaged with the recommendations and moved forward with several key initiatives.</p>
+          <ul class="project-highlights">
+            <li>Organized and validated quarterly sales data from the company ERP system and built visualizations in Excel and Tableau</li>
+            <li>Collaborated across departments with interns from supply chain, chemical formulation, and customer experience to incorporate domain expertise into the final analysis</li>
+            <li>Recommendations included bundled product strategies to increase inventory turnover, a budgeted R&D initiative to address a known product defect, and UGC sponsorships to expand social media reach</li>
+            <li>Presented final deck directly to the CEO and senior leadership; multiple recommendations were adopted</li>
+          </ul>
+          <div class="project-footer">
+            <div class="project-tech">
+              <span class="tech-pill">Excel</span>
+              <span class="tech-pill">Tableau</span>
+              <span class="tech-pill">ERP Systems</span>
+              <span class="tech-pill">Data Visualization</span>
+              <span class="tech-pill">Cross-functional Collaboration</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-strip" style="max-width:100%;">
+    <div style="max-width:1100px; margin:0 auto; width:100%; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:2rem;">
+      <div>
+        <h2>Let's connect.</h2>
+        <p>Open to internship opportunities for Summer 2027.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:yejunchoi29@gmail.com" class="contact-btn primary">yejunchoi29@gmail.com</a>
+        <a href="tel:2015096875" class="contact-btn">(201) 509-6875</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Yejun Choi &mdash; Rutgers University Honors College &mdash; Business Analytics and Information Technology</p>
+</footer>
+
+</body>
+</html>
